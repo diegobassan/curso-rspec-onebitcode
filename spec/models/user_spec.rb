@@ -17,7 +17,11 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
   it "returns the correct hero title" do
-    user = User.create(nickname: 'Chronos',kind: :wizard, level:1)
-    expect(user.title).to eq('wizard Chronos #1')
+    nickname = Faker::Name.name
+    kind = %i[knight wizard].sample
+    level = rand(1...99)
+
+    user = User.create(nickname: nickname,kind: kind, level: level)
+    expect(user.title).to eq("#{kind} #{nickname} ##{level}")
   end
 end
